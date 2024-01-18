@@ -1,14 +1,17 @@
 import { IsEmail, IsNotEmpty, MinLength } from 'class-validator';
+import { UniqueEmail } from '../validators/unique-email.validator';
 
 export class CreateUserDTO {
-  @IsNotEmpty({ message: 'nome não pode ser vazio' })
+  @IsNotEmpty({ message: 'Name cannot be empty' })
   name: string;
 
-  @IsEmail(undefined, { message: 'email não pode ser vazio' })
+  @IsEmail(undefined, { message: 'E-mail cannot be empty' })
+  @UniqueEmail({ message: 'This e-mail address is already in use' })
   email: string;
 
   @MinLength(6, {
-    message: 'a senha não pode ser vazia e precisa ter ao menos 6 caracteres',
+    message:
+      'Password cannot be empty and has to be at least 6 characters long',
   })
   password: string;
 }

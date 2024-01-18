@@ -10,4 +10,9 @@ export class UserRepository {
   async list() {
     return this.users;
   }
+
+  async checkUniqueEmail(email: string) {
+    const userInput = this.users.find((user) => user.email === email);
+    return userInput !== undefined;
+  }
 }
